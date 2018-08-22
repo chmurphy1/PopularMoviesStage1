@@ -2,6 +2,7 @@ package murphy.christopher.popularmoviesstage1;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -9,8 +10,13 @@ import android.widget.Spinner;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnItemSelected;
+import murphy.christopher.popularmoviesstage1.adapters.PageAdapter;
+import murphy.christopher.popularmoviesstage1.interfaces.TaskDelegate;
+import murphy.christopher.popularmoviesstage1.model.Page;
+import murphy.christopher.popularmoviesstage1.util.task.MovieTask;
 
 public class MainActivity extends AppCompatActivity {
+
     //This is my recycler view that I will use for
     //the movie posters
     @BindView(R.id.movie_view)
@@ -20,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     //the movie search types
     @BindView(R.id.search_type)
     Spinner mSearchTypes;
+
+    private PageAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +47,18 @@ public class MainActivity extends AppCompatActivity {
     }
     @OnItemSelected(R.id.search_type)
     public void spinnerItemSelected(Spinner spinner, int position) {
+        //Create a gridlayout manager and assign it to the recyclerview
+        GridLayoutManager mLayoutManager = new GridLayoutManager(this, 2);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setHasFixedSize(true);
 
+        //Get the data from themoviedb.org
+        new MovieTask(new TaskDelegate() {
+            @Override
+            public void finishProcess(Page result) {
+                mAdapter = new PageAdapter(result);
+                mRecyclerView.setAdapter(mAdapter);
+            }
+        }).execute(position);
     }
 }
