@@ -1,0 +1,12 @@
+<resources>
+    <!--
+        Put everything needed for the app for the
+        English language below here.
+    -->
+    <string name="app_name">Popular Movies</string>
+    <string name="search">Search For:</string>
+    <string-array name="search_choices">
+        <item>Popular Movies</item>
+        <item>Top Movies</item>
+    </string-array>
+</resources>
