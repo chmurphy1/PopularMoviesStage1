@@ -2,9 +2,13 @@ package murphy.christopher.popularmoviesstage1.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+import org.parceler.ParcelConstructor;
+
 import java.util.ArrayList;
 import java.util.Date;
 
+@Parcel(Parcel.Serialization.BEAN)
 public class Movie {
 
     @SerializedName("vote_count")
@@ -50,9 +54,23 @@ public class Movie {
     private Date release_date;
 
     public Movie(){
-
+        this.vote_count = 0;
+        this.id = 0;
+        this.video = false;
+        this.vote_average = 0.0;
+        this.title = "";
+        this.popularity = 0.0;
+        this.poster_path = "";
+        this.original_language = "";
+        this.original_title = "";
+        this.genre_ids = new ArrayList<>();
+        this.backdrop_path = "";
+        this.adult = false;
+        this.overview = "";
+        this.release_date = new Date();
     }
 
+    @ParcelConstructor
     public Movie(int vote_count,
                  int id,
                  boolean video,
