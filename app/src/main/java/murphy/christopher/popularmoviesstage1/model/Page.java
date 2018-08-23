@@ -18,7 +18,10 @@ public class Page {
     private ArrayList<Movie> results;
 
     public Page(){
-
+        this.page = 0;
+        this.total_results = 0;
+        this.total_pages = 0;
+        this.results = new ArrayList<>();
     }
 
     public Page(int page, int total_results, int total_pages, ArrayList<Movie> results) {
