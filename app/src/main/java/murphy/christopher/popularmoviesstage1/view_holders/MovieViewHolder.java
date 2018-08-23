@@ -1,6 +1,7 @@
 package murphy.christopher.popularmoviesstage1.view_holders;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -11,8 +12,10 @@ import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import murphy.christopher.popularmoviesstage1.R;
 import murphy.christopher.popularmoviesstage1.model.Movie;
+import murphy.christopher.popularmoviesstage1.util.Constants;
 
 public class MovieViewHolder extends RecyclerView.ViewHolder {
 
@@ -32,7 +35,7 @@ public class MovieViewHolder extends RecyclerView.ViewHolder {
         this.movie = movie;
 
         Glide.with(context)
-                .load("http://image.tmdb.org/t/p/w185/"+movie.getPoster_path())
+                .load(Constants.MOVIE_URL_W185 + movie.getPoster_path())
                 .into(imgMovie);
     }
 }
