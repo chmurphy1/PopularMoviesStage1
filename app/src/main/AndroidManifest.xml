@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="murphy.christopher.popularmoviesstage1">
 
-    <!--Internet Permission-->
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- Internet Permission -->
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -19,6 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MovieDetailActivity"></activity>
     </application>
 
 </manifest>

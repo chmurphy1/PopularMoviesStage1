@@ -9,4 +9,6 @@
         <item>Popular Movies</item>
         <item>Top Movies</item>
     </string-array>
+    <string name="rating">Rating:</string>
+    <string name="release">Release Date:</string>
 </resources>
