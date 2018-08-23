@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
         setupSpinner();
+        setupRecyclerView();
     }
     protected void setupSpinner(){
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -45,6 +46,17 @@ public class MainActivity extends AppCompatActivity {
 
         mSearchTypes.setAdapter(adapter);
     }
+
+    //This prevents an error where the layout has no adapter set
+    protected void setupRecyclerView(){
+        //Create a gridlayout manager and assign it to the recyclerview
+        GridLayoutManager mLayoutManager = new GridLayoutManager(this, 2);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setHasFixedSize(true);
+        mAdapter = new PageAdapter(new Page());
+        mRecyclerView.setAdapter(mAdapter);
+    }
+
     @OnItemSelected(R.id.search_type)
     public void spinnerItemSelected(Spinner spinner, int position) {
         //Create a gridlayout manager and assign it to the recyclerview
