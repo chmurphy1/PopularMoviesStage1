@@ -12,4 +12,8 @@ public class Constants {
 
     public static final int TOP_RATED = 1;
     public static final int POPULAR_MOVIES = 0;
+
+    //This should be moved into a property file later for
+    //localization
+    public static final String DATE_FORMAT = "MMMM d, yyyy";
 }

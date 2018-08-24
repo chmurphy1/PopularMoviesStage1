@@ -11,6 +11,9 @@ import com.bumptech.glide.Glide;
 import org.parceler.Parcels;
 import org.w3c.dom.Text;
 
+import java.nio.file.spi.FileTypeDetector;
+import java.text.SimpleDateFormat;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import murphy.christopher.popularmoviesstage1.model.Movie;
@@ -29,13 +32,15 @@ public class MovieDetailActivity extends AppCompatActivity {
     @BindView(R.id.release_date)
     TextView releaseDate;
 
-    @BindView(R.id.movie_title)
-    TextView movieTitle;
+    @BindView(R.id.synopsis)
+    TextView synopsis;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
+
+        SimpleDateFormat sdf = new SimpleDateFormat(Constants.DATE_FORMAT);
 
         Intent intent = getIntent();
         movieDetails = Parcels.unwrap(intent.getParcelableExtra("movie"));
@@ -43,14 +48,17 @@ public class MovieDetailActivity extends AppCompatActivity {
         if(movieDetails == null){
             //display message to user
         }
+        //Set the title of the activity screen
+        this.setTitle(movieDetails.getOriginal_title());
 
         ButterKnife.bind(this);
-        movieTitle.setText(movieDetails.getOriginal_title());
+
         Glide.with(this)
                 .load(Constants.MOVIE_URL_W185 + movieDetails.getPoster_path())
                 .into(detailPoster);
 
         rating.setText(movieDetails.getVote_average()+"");
-        releaseDate.setText(movieDetails.getRelease_date().toString());
+        releaseDate.setText( sdf.format(movieDetails.getRelease_date()));
+        synopsis.setText(movieDetails.getOverview());
     }
 }
