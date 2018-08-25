@@ -1,11 +1,15 @@
 package murphy.christopher.popularmoviesstage1;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -64,13 +68,21 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setHasFixedSize(true);
 
-        //Get the data from themoviedb.org
-        new MovieTask(new TaskDelegate() {
-            @Override
-            public void finishProcess(Page result) {
-                mAdapter = new PageAdapter(result);
-                mRecyclerView.setAdapter(mAdapter);
-            }
-        }).execute(position);
+        ConnectivityManager cm = (ConnectivityManager) this.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+
+        if(activeNetwork != null && activeNetwork.isAvailable() == true
+                && activeNetwork.isConnected()){
+            //Get the data from themoviedb.org
+            new MovieTask(new TaskDelegate() {
+                @Override
+                public void finishProcess(Page result) {
+                    mAdapter = new PageAdapter(result);
+                    mRecyclerView.setAdapter(mAdapter);
+                }
+            }).execute(position);
+        }else{
+            Toast.makeText(this,R.string.network_error,Toast.LENGTH_LONG);
+        }
     }
 }

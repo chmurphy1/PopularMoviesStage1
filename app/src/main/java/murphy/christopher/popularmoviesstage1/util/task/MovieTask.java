@@ -1,11 +1,13 @@
 package murphy.christopher.popularmoviesstage1.util.task;
 
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 
 import java.io.IOException;
 
 import murphy.christopher.popularmoviesstage1.BuildConfig;
+import murphy.christopher.popularmoviesstage1.R;
 import murphy.christopher.popularmoviesstage1.interfaces.GetMovieDataService;
 import murphy.christopher.popularmoviesstage1.interfaces.TaskDelegate;
 import murphy.christopher.popularmoviesstage1.model.Page;
@@ -48,7 +50,7 @@ public class MovieTask extends AsyncTask<Integer, Void, Page>{
                 page_call = service.getPopularMovies(BuildConfig.MOVIE_DB_API_KEY);
                 break;
             default:
-                //do something here because there is an error
+                //Toast.makeText(App., R.string.network_error,Toast.LENGTH_LONG);
         }
 
         try {

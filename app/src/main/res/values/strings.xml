@@ -11,4 +11,5 @@
     </string-array>
     <string name="rating">Rating:</string>
     <string name="release">Release Date:</string>
+    <string name="network_error">There was a problem with the connection, please try again later.</string>
 </resources>
